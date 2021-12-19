@@ -7,7 +7,7 @@
     File name: RemoveShortcut.ps1
     VERSION: 2021a
     AUTHOR: Chang Chia Jian
-    Created:  2021-12-19
+    Created:  2021-07-20
     Licensed under the MIT license.
     Please credit me if you fint this script useful and do some cool things with it.
 .VERSION HISTORY:
