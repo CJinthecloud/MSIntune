@@ -5,13 +5,13 @@
     This script will create shortcut for URL
 .NOTES
     File name: *******.ps1
-    VERSION: 2005a
+    VERSION: 2021a
     AUTHOR: Chang Chia Jian
     Created:  2021-07-20
     Licensed under the MIT license.
     Please credit me if you fint this script useful and do some cool things with it.
 .VERSION HISTORY:
-    1.0.0 - (2020-09-20) Script created
+    1.0.0 - (2021-12-19) Script created
 #>
 
 $TargetDirectory = "C:\Users\public\Desktop\"
