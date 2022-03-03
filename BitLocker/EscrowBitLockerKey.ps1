@@ -28,3 +28,5 @@ if($BLinfo.MountPoint -eq  $env:SystemDrive -and $blinfo.ProtectionStatus -eq 'O
 New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\FVE" -Name "OSAADBackup" -Value ”0”  -PropertyType "Dword"
     #Write-Log -Message "No encryption in C: drive"
 }
+
+
