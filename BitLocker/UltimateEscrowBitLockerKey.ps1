@@ -33,7 +33,7 @@ if($BitLockerVolume){
         $i++})
     }else{
     #Write-Host "No bitlockerdrive, exit 0"
-    New-ItemProperty -Path 'HKLM:\SOFTWARE\BackupBitLocker' -Name "BitLockerDrive" -Value 0 -Force | Out-Null
+    New-ItemProperty -Path 'HKLM:\SOFTWARE\BackupBitLocker' -Name "BitLockerEncryptedDrive" -Value 0 -Force | Out-Null
     }
     
     
