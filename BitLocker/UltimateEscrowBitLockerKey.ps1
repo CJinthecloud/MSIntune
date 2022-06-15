@@ -7,6 +7,21 @@
 ### Version History : 0.1 First version of the script                   
 ###
 ######################################################################################################################################
+<#
+.SYNOPSIS
+    This script is to escrow the BitLocker recovery key to AAD
+.DESCRIPTION
+    This script will detect and check the BitLocker Drive and upload to the AAD
+.NOTES
+    File name: CreateCustomShortcut.ps1
+    VERSION: 1.0.0
+    AUTHOR: Chang Chia Jian
+    Created:  2022-04-20
+    Licensed under the MIT license.
+    Please credit me if you fint this script useful and do some cool things with it.
+.VERSION HISTORY:
+    1.0.0 - (2022-06-10) Script created
+#>
 
 if (Test-Path 'HKLM:\SOFTWARE\BackupBitLocker') {
         Write-Output 'Registry Path Exists'
