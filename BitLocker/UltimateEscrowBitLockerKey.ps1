@@ -8,23 +8,23 @@
 ###
 ######################################################################################################################################
 
-if (Test-Path 'HKLM:\HKEY_LOCAL_MACHINE\SOFTWARE\BackupBitLocker') {
+if (Test-Path 'HKLM:\SOFTWARE\BackupBitLocker') {
         Write-Output 'Registry Path Exists'
     } else {
         Write-Output 'Registry Path does not exist, Creating...'
         New-Item 'HKLM:\SOFTWARE\BackupBitLocker' -Force | Out-Null
     }
-
+    
+#Check BitLocker Encrypted Drives
 $BitLockerVolume = Get-BitLockerVolume  -ErrorAction Stop | where {$_.ProtectionStatus -eq "On"} | where {$_.EncryptionPercentage -eq '100'}
 
+#Split the output into array and loop from the drive letter
 if($BitLockerVolume){
     New-ItemProperty -Path 'HKLM:\SOFTWARE\BackupBitLocker' -Name "BitLockerDrive" -Value 1 -Force | Out-Null
-    #Write-Host "true, backup key now..."
     $DriveLetter = $BitLockerVolume.MountPoint
     $a = $DriveLetter.Split(" ")
     $i = 0
     $a.ForEach({
-    #Write-Host "this is" $a[$i] "Drive"
         $MP = $a[$i]
         $Protectors = (Get-BitlockerVolume -MountPoint  $MP).KeyProtector 
         $RecoveryPw = ($Protectors | where-object { $_.KeyProtectorType -eq "RecoveryPassword" })
@@ -32,7 +32,6 @@ if($BitLockerVolume){
         New-ItemProperty -Path 'HKLM:\SOFTWARE\BackupBitLocker' -Name $MP -Value 1 -Force | Out-Null
         $i++})
     }else{
-    #Write-Host "No bitlockerdrive, exit 0"
     New-ItemProperty -Path 'HKLM:\SOFTWARE\BackupBitLocker' -Name "BitLockerEncryptedDrive" -Value 0 -Force | Out-Null
     }
     
