@@ -1,12 +1,3 @@
-﻿######################################################################################################################################
-###
-### Name:           : UltimateEscrowBitLockerKey.ps1
-### Created by      : Chang Chia Jian
-### Created on      : 06/06/2022
-### Latest Version  : 0.1
-### Version History : 0.1 First version of the script                   
-###
-######################################################################################################################################
 <#
 .SYNOPSIS
     This script is to escrow the BitLocker recovery key to AAD
