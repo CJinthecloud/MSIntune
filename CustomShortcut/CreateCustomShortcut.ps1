@@ -4,8 +4,8 @@
 .DESCRIPTION
     This script will create shortcut for URL
 .NOTES
-    File name: *******.ps1
-    VERSION: 2021a
+    File name: CreateCustomShortcut.ps1
+    VERSION: 1.0.0
     AUTHOR: Chang Chia Jian
     Created:  2021-07-20
     Licensed under the MIT license.
