@@ -9,7 +9,7 @@
 ######################################################################################################################################
  
 #Check BitLocker Drive Encryption
-$BitLockerVolume = Get-BitLockerVolume  -ErrorAction Stop | where {$_.ProtectionStatus -ne "off"} | where {$_.AutoUnlockEnabled -ne $null}
+$BitLockerVolume = Get-BitLockerVolume  -ErrorAction Stop | where {$_.ProtectionStatus -eq "on"} | where {$_.AutoUnlockEnabled -ne "false"}
 if($BitLockerVolume){
         return 1
     }else{
