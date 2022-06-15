@@ -21,10 +21,10 @@ if (Test-Path 'HKLM:\SOFTWARE\BackupBitLocker') {
         New-Item 'HKLM:\SOFTWARE\BackupBitLocker' -Force | Out-Null
     }
     
-#Check BitLocker Encrypted Drives
-$BitLockerVolume = Get-BitLockerVolume  -ErrorAction Stop | where {$_.ProtectionStatus -eq "On"} | where {$_.EncryptionPercentage -eq '100'}
+#Check BDE Status
+$BitLockerVolume = Get-BitLockerVolume  -ErrorAction Stop | where {$_.ProtectionStatus -eq "on"} | where {$_.AutoUnlockEnabled -ne "false"}
 
-#Split the output into array and loop from the drive letter
+#Split the output into array and loop based on the drive letter
 if($BitLockerVolume){
     New-ItemProperty -Path 'HKLM:\SOFTWARE\BackupBitLocker' -Name "BitLockerDrive" -Value 1 -Force | Out-Null
     $DriveLetter = $BitLockerVolume.MountPoint
