@@ -5,7 +5,7 @@
     This script use to delete the shortcut which created from CreateCustomShortcut.ps1 
 .NOTES
     File name: RemoveShortcut.ps1
-    VERSION: 2021a
+    VERSION: 1.0.0
     AUTHOR: Chang Chia Jian
     Created:  2021-07-20
     Licensed under the MIT license.
