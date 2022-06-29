@@ -5,28 +5,29 @@
     This script will detect and check the BitLocker Drive and upload to the AAD
 .NOTES
     File name: CreateCustomShortcut.ps1
-    VERSION: 1.0.0
+    VERSION: 1.1.0
     AUTHOR: Chang Chia Jian
-    Created:  2022-04-20
+    Created:  2022-06-10
     Licensed under the MIT license.
     Please credit me if you fint this script useful and do some cool things with it.
 .VERSION HISTORY:
     1.0.0 - (2022-06-10) Script created
+    1.1.0 - (2022-06-23) Debug the registry key set
 #>
 
-if (Test-Path 'HKLM:\SOFTWARE\BackupBitLocker') {
-        Write-Output 'Registry Path Exists'
+$path = "HKLM:\SOFTWARE\Microsoft\BackupBitLocker\"
+if (Test-Path -Path $path) {
+        write-host "path exists"
     } else {
-        Write-Output 'Registry Path does not exist, Creating...'
-        New-Item 'HKLM:\SOFTWARE\BackupBitLocker' -Force | Out-Null
+        New-Item -Path $path -Force
     }
-    
+
 #Check BDE Status
 $BitLockerVolume = Get-BitLockerVolume  -ErrorAction Stop | where {$_.ProtectionStatus -eq "on"} | where {$_.AutoUnlockEnabled -ne "false"}
 
 #Split the output into array and loop based on the drive letter
 if($BitLockerVolume){
-    New-ItemProperty -Path 'HKLM:\SOFTWARE\BackupBitLocker' -Name "BitLockerDrive" -Value 1 -Force | Out-Null
+    Set-ItemProperty -Path $path -Name "EncryptedDrive" -Value 1 -Force | Out-Null
     $DriveLetter = $BitLockerVolume.MountPoint
     $a = $DriveLetter.Split(" ")
     $i = 0
@@ -35,10 +36,10 @@ if($BitLockerVolume){
         $Protectors = (Get-BitlockerVolume -MountPoint  $MP).KeyProtector 
         $RecoveryPw = ($Protectors | where-object { $_.KeyProtectorType -eq "RecoveryPassword" })
         $Escrow2AAD = BackupToAAD-BitLockerKeyProtector -MountPoint $MP -KeyProtectorId $RecoveryPw.KeyProtectorID
-        New-ItemProperty -Path 'HKLM:\SOFTWARE\BackupBitLocker' -Name $MP -Value 1 -Force | Out-Null
+        Set-ItemProperty -Path $path -Name $MP -Value 1 -Force | Out-Null
         $i++})
     }else{
-    New-ItemProperty -Path 'HKLM:\SOFTWARE\BackupBitLocker' -Name "BitLockerEncryptedDrive" -Value 0 -Force | Out-Null
-    }
-    
-    
+    Set-ItemProperty -Path $path -Name "EncryptedDrive" -Value 0 -Force | Out-Null
+    }   
+
+
