@@ -2,9 +2,9 @@
 .SYNOPSIS
     This script is to escrow the BitLocker recovery key to AAD
 .DESCRIPTION
-    This script will detect and check the BitLocker Drive and upload to the AAD
+    This script will detect and identify the BitLocker Drive and auto escrow to Azure AD
 .NOTES
-    File name: CreateCustomShortcut.ps1
+    File name: UltimateEscrowBitLockerKey.ps1
     VERSION: 1.1.0
     AUTHOR: Chang Chia Jian
     Created:  2022-06-10
