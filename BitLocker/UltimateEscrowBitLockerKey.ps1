@@ -23,7 +23,7 @@ if (Test-Path -Path $path) {
     }
 
 #Check BDE Status
-$BitLockerVolume = Get-BitLockerVolume  -ErrorAction Stop | where {$_.ProtectionStatus -eq "on"} | where {$_.AutoUnlockEnabled -ne "false"}
+$BitLockerVolume = Get-BitLockerVolume  -ErrorAction Stop | where {($_.ProtectionStatus -eq "on") -and ($_.AutoUnlockEnabled -ne "false") -or ($_.AutoUnlockEnabled -eq "true")}
 
 #Split the output into array and loop based on the drive letter
 if($BitLockerVolume){
