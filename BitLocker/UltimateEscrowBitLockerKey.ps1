@@ -12,7 +12,7 @@
     Please credit me if you fint this script useful and do some cool things with it.
 .VERSION HISTORY:
     1.0.0 - (2022-06-10) Script created
-    1.1.0 - (2022-06-23) Debug the registry key set
+    1.1.0 - (2022-06-23) Debug the registry key set & conditions of BitLocker volume
 #>
 
 $path = "HKLM:\SOFTWARE\Microsoft\BackupBitLocker\"
